@@ -8,12 +8,9 @@ const App = () => {
   const APP_ID = "ea3e45dc";
   const APP_KEY = "9b03ca6da51f863cb921a6f581f46be0";
 
-
   const [recipes, setRecipes] = useState([]);
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("chicken");
-
-
 
   useEffect(() => {
     getRecipes();
@@ -25,12 +22,10 @@ const App = () => {
     setRecipes(data.hits);
   };
 
-
   const updateSearch = e => {
     setSearch(e.target.value);
 
   };
-
 
   const getSearch = e => {
     e.preventDefault();
@@ -38,21 +33,16 @@ const App = () => {
     setSearch("");
   };
 
-
   return (<div className="App">
     <form onSubmit={getSearch} className="search-form">
-      <input className="search-bar" type="text" value={search} onChange={updateSearch} />
+      <input className="search-bar" type="text" value={search} onChange={updateSearch}/>
       <button className="search-button" type="submit">Search</button>
     </form>
 
-    {recipes.map(recipe =>(
-      <Recipe
-        key={recipe.recipe.label}
-        title={recipe.recipe.label}
-        calories={recipe.recipe.calories}
-        image={recipe.recipe.image}
-        />
-    ))};
+    <div className="recipes">
+      {recipes.map(recipe => (<Recipe key={recipe.recipe.label} title={recipe.recipe.label} calories={recipe.recipe.calories} image={recipe.recipe.image} ingredients={recipe.recipe.ingredients}/>))};
+    </div>
+
   </div>);
 }
 
